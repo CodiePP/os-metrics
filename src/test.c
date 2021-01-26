@@ -22,13 +22,24 @@ int main (int argc, char **argv) {
     memcpy(buffer2, buffer1, sz);
   }
 
-  if (osm_read_proc_stats(&_proc_stats, pid) == 0)
+  int res = 0;
+  if ((res = osm_read_proc_stats(&_proc_stats, pid)) == 0)
   {
-    printf("os-metrics\n  resident size = %ld bytes\n  user time = %ld ns\n  system time = %ld ns\n", _proc_stats._resident_memory, _proc_stats._user_time_ns, _proc_stats._system_time_ns);
+    printf("os-metrics on process with pid %d\n  resident size = %ld bytes\n  user time = %ld ns\n  system time = %ld ns\n  total cpu time = %ld ns\n", pid, _proc_stats._resident_memory, _proc_stats._user_time_ns, _proc_stats._system_time_ns, _proc_stats._cpu_time_ns);
   }
   else
   {
-    printf("something went wrong!\n");
+    printf("something went wrong (1): %d!\n", res);
+  }
+
+  struct OSM_Sys_stats _sys_stats;
+  if ((res = osm_read_sys_stats(&_sys_stats)) == 0)
+  {
+    printf("os-metrics on system\n  user time = %ld ns\n  system time = %ld ns\n  total cpu time = %ld ns\n", _sys_stats._user_time_ns, _sys_stats._system_time_ns, _sys_stats._cpu_time_ns);
+  }
+  else
+  {
+    printf("something went wrong (2): %d!\n", res);
   }
 
   return 0;

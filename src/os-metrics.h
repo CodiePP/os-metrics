@@ -21,9 +21,18 @@
 struct OSM_Proc_stats {
   unsigned long _user_time_ns;
   unsigned long _system_time_ns;
+  unsigned long _cpu_time_ns;
   unsigned long _resident_memory;
 };
 
 int osm_read_proc_stats(struct OSM_Proc_stats *, int pid);
 
+
+struct OSM_Sys_stats {
+  unsigned long _user_time_ns;
+  unsigned long _system_time_ns;
+  unsigned long _cpu_time_ns;
+};
+
+int osm_read_sys_stats(struct OSM_Sys_stats *);
 
