@@ -57,7 +57,8 @@ int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
     return res;
 }
 
-
+/* this returns the total CPU time spent;
+   build a difference between measurements */
 int osm_read_sys_stats(struct OSM_Sys_stats *stats) {
     int res = 1;
     long clktck = sysconf(_SC_CLK_TCK);
