@@ -23,6 +23,7 @@ ENDIF()
 set(TARGETNAME ${PROJECT_NAME}_${CMAKE_BUILD_TYPE}_${PROJECT_VERSION_MAJOR}_${PROJECT_VERSION_MINOR}_${PROJECT_VERSION_PATCH})
 
 set(PLATFORM "unknown")
+set(libs "")
 
 # OS dependent
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -36,6 +37,7 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
   set(PLATFORM "freebsd")
+  set(libs "util")
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -56,6 +58,7 @@ add_executable( test_${PLATFORM}_${CMAKE_BUILD_TYPE}
 
 target_link_libraries( test_${PLATFORM}_${CMAKE_BUILD_TYPE}
   ${TARGETNAME}
+  ${libs}
 )
 
 # cpack
