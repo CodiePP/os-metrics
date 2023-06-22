@@ -49,6 +49,8 @@ int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
     /* the following are: "run time for terminated threads within the task" */
     //stats->_user_time_ns = timeval2nanoseconds(t_info.user_time);
     //stats->_system_time_ns = timeval2nanoseconds(t_info.system_time);
+    stats->_user_time_ns = 0;
+    stats->_system_time_ns = 0;
 
     thread_array_t thr_list;
     mach_msg_type_number_t thr_count;
