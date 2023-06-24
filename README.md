@@ -11,3 +11,8 @@ cmake -DCMAKE_BUILD_TYPE=Debug ..
 make
 ```
 
+on Windows (MinGW64):
+
+```
+cmake -DCMAKE_BUILD_TYPE=Debug -G "MSYS Makefiles" ..
+```

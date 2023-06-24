@@ -24,6 +24,8 @@
 #include "os-metrics-darwin.c"
 #elif defined(__FreeBSD__)
 #include "os-metrics-freebsd.c"
+#elif defined(_WIN64)
+#include "os-metrics-windows.c"
 #else
 #error not known platform
 #endif
