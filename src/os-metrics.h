@@ -17,6 +17,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 struct OSM_Proc_stats {
   unsigned long long _user_time_ns;
@@ -36,3 +39,6 @@ struct OSM_Sys_stats {
 
 int osm_read_sys_stats(struct OSM_Sys_stats *);
 
+#ifdef __cplusplus
+}
+#endif
