@@ -4,7 +4,7 @@ project(os-metrics)
 
 # The version number.
 set (PROJECT_VERSION_MAJOR 1)
-set (PROJECT_VERSION_MINOR 0)
+set (PROJECT_VERSION_MINOR 1)
 set (PROJECT_VERSION_PATCH 0)
 
 IF(DEFINED CMAKE_BUILD_TYPE)
