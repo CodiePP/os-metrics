@@ -35,7 +35,7 @@ unsigned long timeval2nanoseconds(struct time_value tv) {
   return t;
 }
 
-int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
+int osm_read_proc_stats(int pid, struct OSM_Proc_stats *stats) {
     task_t task = MACH_PORT_NULL;
     if (task_for_pid(current_task(), pid, &task) != KERN_SUCCESS) {
         return -1;

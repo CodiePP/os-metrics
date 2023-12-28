@@ -36,7 +36,7 @@ unsigned long timeval2nanoseconds(struct timeval *tv) {
   return t;
 }
 
-int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
+int osm_read_proc_stats(int pid, struct OSM_Proc_stats *stats) {
     int res = 1;
     struct kinfo_proc *usage = kinfo_getproc(pid);
     if (usage != NULL) {

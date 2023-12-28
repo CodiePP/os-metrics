@@ -46,6 +46,8 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 add_definitions( -DPLATFORM=${PLATFORM} )
 
+add_definitions( -Wall -Werror )
+
 include_directories (${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_library( ${TARGETNAME}

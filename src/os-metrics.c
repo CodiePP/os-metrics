@@ -30,3 +30,14 @@
 #error not known platform
 #endif
 
+#if !defined(_WIN64)
+
+#include <time.h>
+
+uint64_t osm_timestamp_ns() {
+   struct timespec ts;
+   timespec_get(&ts, TIME_UTC);
+   return ts.tv_sec * 1E9 + ts.tv_nsec;
+}
+
+#endif

@@ -45,7 +45,7 @@ long sf_atol(const char *token) {
     else { return res; }
 }
 
-int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
+int osm_read_proc_stats(int pid, struct OSM_Proc_stats *stats) {
     struct rusage usage;
     int res = getrusage(RUSAGE_SELF, &usage);
     if (res == 0) {

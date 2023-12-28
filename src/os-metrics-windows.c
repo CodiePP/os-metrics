@@ -59,11 +59,10 @@ ULONGLONG ns_of_filetime(const FILETIME *ft) {
 }
 
 int osm_read_sys_stats(struct OSM_Sys_stats *stats) {
-    int res = 1;
     FILETIME usert={0,0};
     FILETIME kernelt={0,0};
     FILETIME idlet={0,0};
-    if (! GetSystemTimes(&idlet, &kernelt, &usert)) { exit -1; }
+    if (! GetSystemTimes(&idlet, &kernelt, &usert)) { exit(-1); }
     ULONGLONG idletime = ns_of_filetime(&idlet);
     stats->_user_time_ns = ns_of_filetime(&usert);
     stats->_system_time_ns = ns_of_filetime(&kernelt) - idletime;
@@ -71,7 +70,7 @@ int osm_read_sys_stats(struct OSM_Sys_stats *stats) {
     return 0;
 }
 
-int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
+int osm_read_proc_stats(int pid, struct OSM_Proc_stats *stats) {
     HANDLE hProc;
     hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
     if (hProc == NULL) { return -1; }
@@ -93,3 +92,17 @@ int osm_read_proc_stats(struct OSM_Proc_stats *stats, int pid) {
     return 0;
 }
 
+static LARGE_INTEGER _tm_freq = { 0LL };
+
+uint64_t osm_timestamp_ns() {
+    if (_tm_freq.QuadPart <= 0) {
+        QueryPerformanceFrequency(&_tm_freq);
+    }
+    LARGE_INTEGER _counter;
+    if ((_tm_freq.QuadPart > 0) && QueryPerformanceCounter(&_counter)) {
+        return _counter.QuadPart * (1E9 / _tm_freq.QuadPart);
+    } else {
+        return 0;
+    }
+
+}

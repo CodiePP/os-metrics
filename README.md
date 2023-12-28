@@ -16,3 +16,9 @@ on Windows (MinGW64):
 ```
 cmake -DCMAKE_BUILD_TYPE=Debug -G "MSYS Makefiles" ..
 ```
+
+### cross-compilation
+
+```
+cmake --fresh -DCMAKE_TOOLCHAIN_FILE=../ToolchainWin64.cmake -DCMAKE_BUILD_TYPE=Debug ..
+```

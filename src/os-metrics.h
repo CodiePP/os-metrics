@@ -17,27 +17,31 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 struct OSM_Proc_stats {
-  unsigned long long _user_time_ns;
-  unsigned long long _system_time_ns;
-  unsigned long long _cpu_time_ns;
-  unsigned long _resident_memory;
+  uint64_t _user_time_ns;
+  uint64_t _system_time_ns;
+  uint64_t _cpu_time_ns;
+  uint32_t _resident_memory;
 };
 
-int osm_read_proc_stats(struct OSM_Proc_stats *, int pid);
+int osm_read_proc_stats(int pid, struct OSM_Proc_stats *);
 
 
 struct OSM_Sys_stats {
-  unsigned long long _user_time_ns;
-  unsigned long long _system_time_ns;
-  unsigned long long _cpu_time_ns;
+  uint64_t _user_time_ns;
+  uint64_t _system_time_ns;
+  uint64_t _cpu_time_ns;
 };
 
 int osm_read_sys_stats(struct OSM_Sys_stats *);
+
+uint64_t osm_timestamp_ns();
 
 #ifdef __cplusplus
 }
